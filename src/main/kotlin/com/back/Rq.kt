@@ -4,7 +4,7 @@ class Rq(
     val cmd:String,
 ) {
 
-    var actionName:String=""
+    val actionName:String
     val paramMap: Map<String,String>
 
     init{
