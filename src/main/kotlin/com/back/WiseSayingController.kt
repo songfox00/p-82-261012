@@ -1,7 +1,7 @@
 package com.back
 
 class WiseSayingController(
-    val wiseSayingService: WiseSayingService
+    val wiseSayingService: WiseSayingService = WiseSayingService()
 ) {
 
     fun write() {
@@ -18,7 +18,9 @@ class WiseSayingController(
     fun list()  {
         println("번호 / 명언 / 작가")
         println("----------------------")
-        wiseSayingService.findListDesc()
+        wiseSayingService.findListDesc().forEach {
+            println("${it.id} / ${it.author} / ${it.content}")
+        }
     }
 
     fun delete(rq: Rq) {
@@ -56,10 +58,10 @@ class WiseSayingController(
             return
         }
 
-        println("명언(기존) : ${wiseSaying.content}): ")
+        println("명언(기존) : ${wiseSaying.content}")
         print("명언 : ")
         val newContent = readln().trim()
-        println("작가(기존: ${wiseSaying.author}): ")
+        println("작가(기존: ${wiseSaying.author}")
         print("작가 : ")
         val newAuthor = readln().trim()
 
