@@ -1,9 +1,8 @@
 package com.back
 
-class WiseSayingController {
-
-    var lastId = 0
-    val wiseSayings = mutableListOf<WiseSaying>()
+class WiseSayingController(
+    val wiseSayingService: WiseSayingService
+) {
 
     fun write() {
         print("명언: ")
@@ -11,21 +10,15 @@ class WiseSayingController {
         print("작가: ")
         val author = readln().trim()
 
-        val id=++lastId
+        val wiseSaying = wiseSayingService.add(content, author)
 
-        WiseSaying(id,content,author).also{
-            wiseSayings.add(it)
-        }
-
-        println("${id}번 명언이 등록되었습니다")
+        println("${wiseSaying.id}번 명언이 등록되었습니다")
     }
 
     fun list()  {
         println("번호 / 명언 / 작가")
         println("----------------------")
-        wiseSayings.reversed().forEach{
-            println("${it.id} / ${it.content} / ${it.author}")
-        }
+        wiseSayingService.findListDesc()
     }
 
     fun delete(rq: Rq) {
@@ -36,16 +29,14 @@ class WiseSayingController {
             return
         }
 
-        val wiseSaying=wiseSayings.firstOrNull{
-            it.id == id
-        }
+        val wiseSaying=wiseSayingService.findById(id)
 
         if (wiseSaying == null) {
             println("${id}번 명언은 존재하지 않습니다.")
             return
         }
 
-        wiseSayings.remove(wiseSaying)
+        wiseSayingService.delete(wiseSaying)
         println("${id}번 명언이 삭제되었습니다.")
     }
 
@@ -58,9 +49,7 @@ class WiseSayingController {
             return
         }
 
-        val wiseSaying = wiseSayings.firstOrNull {
-            it.id == id
-        }
+        val wiseSaying = wiseSayingService.findById(id)
 
         if (wiseSaying == null) {
             println("${id}번 명언은 존재하지 않습니다.")
