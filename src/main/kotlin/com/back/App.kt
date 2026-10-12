@@ -3,6 +3,7 @@ package com.back
 class App {
     fun run() {
         var lastId=0
+        val wiseSayings=mutableSetOf<WiseSaying>()
 
         println("== 명언 앱 ==")
 
@@ -16,12 +17,23 @@ class App {
                 "등록" -> {
                     print("명언: ")
                     val content = readln().trim()
-
                     print("작가: ")
                     val author = readln().trim()
 
                     val id=++lastId
+
+                    WiseSaying(id,content,author).also{
+                        wiseSayings.add(it)
+                    }
+
                     println("${id}번 명언이 등록되었습니다")
+                }
+                "목록" -> {
+                    println("번호 / 명언 / 작가")
+                    println("----------------------")
+                    wiseSayings.reversed().forEach{
+                        println("${it.id} / ${it.content} / ${it.author} / ${it.id}")
+                    }
                 }
             }
         }
