@@ -95,10 +95,14 @@ class WiseSayingFileRepository : WiseSayingRepository {
     }
 
     override fun delete(wiseSaying: WiseSaying): Boolean {
-        TODO("Not yet implemented")
+        return tableDirPath
+            .resolve("${wiseSaying.id}.json")
+            .toFile()
+            .takeIf { it.exists() }
+            ?.delete() ?: false
     }
 
     override fun clear() {
-        TODO("Not yet implemented")
+        tableDirPath.toFile().deleteRecursively()
     }
 }
