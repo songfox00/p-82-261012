@@ -24,7 +24,7 @@ class WiseSayingFileRepositoryTest {
     @Test
     fun `save`() {
         val wiseSaying = wiseSayingRepository
-            .save(WiseSaying(content = "나의 죽음을 적들에게 알리지 말라.", author = "충무공 이순신"))
+            .save(WiseSaying("나의 죽음을 적들에게 알리지 말라.", "충무공 이순신"))
 
         val isExist = wiseSayingRepository
             .tableDirPath

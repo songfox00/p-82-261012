@@ -40,7 +40,21 @@ class WiseSayingFileRepository : WiseSayingRepository {
     }
 
     override fun findById(id: Int): WiseSaying? {
-        TODO("Not yet implemented")
+
+        //        val rst = tableDirPath
+//            .toFile()
+//            .listFiles()
+//            ?.find { it.name == "${id}.json" }
+//
+//        if(rst != null) {
+//            WiseSaying.fromJsonStr(rst.readText())
+//        }
+
+        return tableDirPath
+            .toFile()
+            .listFiles()
+            ?.find { it.name == "${id}.json" }
+            ?.let { WiseSaying.fromJsonStr(it.readText()) }
     }
 
     override fun delete(wiseSaying: WiseSaying): Boolean {
