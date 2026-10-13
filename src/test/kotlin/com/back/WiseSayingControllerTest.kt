@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
 import kotlin.test.assertContains
 
-class AppTest {
+class WiseSayingControllerTest {
 
     @Test
     fun `명언 작성`() {
@@ -75,7 +75,7 @@ class AppTest {
                 수정?id=1
                 너 자신을 알라
                 소크라테스
-                목록 
+                목록
                 """.trimIndent()
         )
 
