@@ -12,7 +12,7 @@ class WiseSayingController(
 
         val wiseSaying = wiseSayingService.add(content, author)
 
-        println("${wiseSaying.id}번 명언이 등록되었습니다")
+        println("${wiseSaying.id}번 명언이 등록되었습니다.")
     }
 
     fun list()  {
