@@ -25,4 +25,17 @@ class WiseSayingMemRepository : WiseSayingRepository {
 
     override fun delete(wiseSaying: WiseSaying) = wiseSayings.remove(wiseSaying)
 
+    override fun findByAuthorLike(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
+    override fun findByContentLike(keyword: String): List<WiseSaying> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findByAuthorContent(keyword: String): List<WiseSaying> {
+        return listOf()
+    }
+
+
 }

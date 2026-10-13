@@ -110,4 +110,38 @@ class WiseSayingFileRepository : WiseSayingRepository {
     override fun clear() {
         tableDirPath.toFile().deleteRecursively()
     }
+
+    private fun filterByKeyword(
+        keyword: String,
+        selector: (WiseSaying) -> String
+    ): List<WiseSaying> {
+
+        val pure = keyword.replace("%", "")
+        val wiseSayings = findListDesc()
+
+        if (pure.isBlank()) return wiseSayings
+
+        return when {
+            keyword.startsWith("%") && keyword.endsWith("%") ->
+                wiseSayings.filter { selector(it).contains(pure) }
+            keyword.startsWith("%") ->
+                wiseSayings.filter { selector(it).endsWith(pure) }
+            keyword.endsWith("%") ->
+                wiseSayings.filter { selector(it).startsWith(pure) }
+            else ->
+                wiseSayings.filter { selector(it) == pure }
+        }
+    }
+
+    override fun findByAuthorLike(authorLike: String): List<WiseSaying> {
+        return filterByKeyword(authorLike){it.author}
+    }
+
+    override fun findByContentLike(contentLike: String): List<WiseSaying> {
+        return filterByKeyword(contentLike){it.content}
+    }
+
+    override fun findByAuthorContent(contentLike: String): List<WiseSaying> {
+        return filterByKeyword(contentLike){it.content}
+    }
 }

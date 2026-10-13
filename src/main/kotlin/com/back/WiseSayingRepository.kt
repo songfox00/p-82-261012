@@ -6,4 +6,7 @@ interface WiseSayingRepository {
     fun findById(id: Int): WiseSaying?
     fun delete(wiseSaying: WiseSaying): Boolean
     fun clear()
+    fun findByAuthorLike(keyword: String): List<WiseSaying>
+    fun findByContentLike(keyword: String): List<WiseSaying>
+    fun findByAuthorContent(keyword: String): List<WiseSaying>
 }
