@@ -16,7 +16,7 @@ class WiseSayingController(
     }
 
     fun list()  {
-        println("번호 / 명언 / 작가")
+        println("번호 / 작가 / 명언")
         println("----------------------")
         wiseSayingService.findListDesc().forEach {
             println("${it.id} / ${it.author} / ${it.content}")
